@@ -1,6 +1,6 @@
 # .yml file defines a single service built grom the Dockerfile.
 
-# only command so far is yo echo "ready" and exit.
+# only command so far is echo "ready" and exit. This "dummy" command gets deleted later; when we add ports.
 # the volume line /home/app/chat, when used with ./, mounts a tells docker the path on
 # the host relative to the Compose file in the container. This is key so that changes
 # made to the source files on the host are automatically reflected inside the container, and viceversa.
@@ -9,7 +9,8 @@
 
 chat:
   build: .
-  command: echo 'ready'
+  ports:
+    - '3000:3000'
   volumes:
     - .:/home/app/chat
     - /home/app/chat/node_modules

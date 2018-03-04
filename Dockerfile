@@ -4,7 +4,7 @@
 FROM node:4.3.2
 
 # Chain 2 shell commands together in a single RUN command. This reduces the number of layers in the resulting images.
-# 1st shell command: Create unprivileged user "app" to run the app inside the container. W/out this, process inside container runs
+# 1st command: Create unprivileged user "app" to run the app inside the container. W/out this, process inside container runs
 # as root, which is a security issue.
 # 2nd shell command: Install npm. Again use a specific version.
 RUN useradd --user-group --create-home --shell /bin/false app &&\
@@ -26,3 +26,5 @@ WORKDIR $HOME/chat
 # npm cache clean removes the tar files that npm fownloads durig the install.
 RUN npm install
 RUN npm cache clean
+
+CMD ["node", "index.js"]
