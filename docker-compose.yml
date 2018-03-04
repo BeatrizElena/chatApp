@@ -1,0 +1,15 @@
+# .yml file defines a single service built grom the Dockerfile.
+
+# only command so far is yo echo "ready" and exit.
+# the volume line /home/app/chat, when used with ./, mounts a tells docker the path on
+# the host relative to the Compose file in the container. This is key so that changes
+# made to the source files on the host are automatically reflected inside the container, and viceversa.
+# 2 potential issues w/ above volume line: how npm installs dependencies and making user the Linux User
+# Identifier (UID) of the host and of the container match.
+
+chat:
+  build: .
+  command: echo 'ready'
+  volumes:
+    - .:/home/app/chat
+    - /home/app/chat/node_modules
