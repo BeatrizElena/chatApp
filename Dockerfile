@@ -27,4 +27,11 @@ WORKDIR $HOME/chat
 RUN npm install
 RUN npm cache clean
 
+# Running the container as a standalone:
+# To deploy app image to production, build the app source into said image by copying the app folder into the container.
+USER root
+COPY . $HOME/chatApp
+RUN chown -R app:app $HOME/*
+USER app
+
 CMD ["node", "index.js"]
